@@ -6,7 +6,7 @@ export function Layout() {
   return (
     <PhoneFrame>
       {/* Content Area */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 flex flex-col [&>*]:flex-1 sm:overflow-y-auto">
         <Outlet />
       </div>
 

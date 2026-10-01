@@ -19,8 +19,8 @@ export function LoginPage() {
 
   return (
     <PhoneFrame>
-      <div className="h-full overflow-y-auto bg-[linear-gradient(180deg,#EEF4FF_0%,#ffffff_42%)]">
-        <div className="min-h-full flex flex-col justify-center px-7 py-8">
+      <div className="flex-1 flex flex-col sm:overflow-y-auto bg-[linear-gradient(180deg,#EEF4FF_0%,#ffffff_42%)]">
+        <div className="flex-1 flex flex-col justify-center px-7 py-8">
             {/* Brand */}
             <div className="w-full mb-7">
               <Logo size="lg" showTagline />

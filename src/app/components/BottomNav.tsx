@@ -14,7 +14,7 @@ export function BottomNav() {
   const location = useLocation();
 
   return (
-    <div className="relative z-10 bg-white border-t border-border shadow-[0_-8px_24px_-16px_rgba(11,27,63,0.25)]">
+    <div className="sticky bottom-0 z-10 bg-white border-t border-border shadow-[0_-8px_24px_-16px_rgba(11,27,63,0.25)]">
       <div className="flex items-end px-2 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
         {navItems.map((item) => {
           const Icon = item.icon;
