@@ -1,0 +1,34 @@
+@import "./fonts.css";
+@import "./theme.css";
+@import "tailwindcss";
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #B9CBF5;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1F5BFF;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #B9CBF5 transparent;
+}
+/* Heading weights — declared after Tailwind so they win over its preflight reset */
+@layer base {
+  h1 { font-weight: 800; letter-spacing: -0.025em; }
+  h2 { font-weight: 700; letter-spacing: -0.015em; }
+  h3, h4 { font-weight: 700; }
+}
