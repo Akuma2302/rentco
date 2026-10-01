@@ -1,11 +1,16 @@
-import { Star, Mail, MapPin, Award, Package, LogOut, Trophy, Zap, BadgeCheck } from "lucide-react";
+import { Star, Mail, MapPin, Phone, Home as HomeIcon, Award, Package, LogOut, Trophy, Zap, BadgeCheck } from "lucide-react";
 import { Button } from "../components/ui/button";
-import { currentUser } from "../data/mockData";
+import { useNavigate } from "react-router";
+import { currentUser, mockItems } from "../data/mockData";
+import { useProfile } from "../data/profile";
 import { mockTrustScores } from "../data/trustScore";
 import { TrustScoreCard } from "../components/TrustScoreCard";
 
 export function ProfilePage() {
+  const navigate = useNavigate();
+  const { profile } = useProfile();
   const myTrust = mockTrustScores[currentUser.id];
+  const myListingsCount = mockItems.filter((item) => item.ownerId === currentUser.id).length;
 
   return (
     <div className="flex flex-col h-full bg-white">
@@ -13,16 +18,17 @@ export function ProfilePage() {
       <div className="bg-[linear-gradient(135deg,#1F5BFF_0%,#0B1B3F_100%)] text-white px-5 pt-8 pb-6 rounded-b-[28px]">
         <div className="flex items-center gap-4 mb-2">
           <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-brand-blue text-2xl font-extrabold ring-4 ring-white/20">
-            {currentUser.name.charAt(0)}
+            {profile.name.charAt(0).toUpperCase()}
           </div>
           <div className="flex-1">
-            <h1 className="text-xl mb-1 text-white">{currentUser.name}</h1>
+            <h1 className="text-xl mb-1 text-white">{profile.name}</h1>
             <div className="flex items-center gap-1 text-white/90 text-sm">
               <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
               <span>
                 {currentUser.rating} ({currentUser.reviewCount} reviews)
               </span>
             </div>
+            {profile.bio && <p className="text-xs text-white/80 mt-1.5 line-clamp-2">{profile.bio}</p>}
           </div>
         </div>
       </div>
@@ -30,7 +36,7 @@ export function ProfilePage() {
       {/* Stats */}
       <div className="grid grid-cols-3 gap-3 px-5 pt-4">
         <div className="text-center rounded-2xl bg-brand-sky py-3">
-          <div className="text-2xl font-extrabold text-brand-blue mb-0.5">12</div>
+          <div className="text-2xl font-extrabold text-brand-blue mb-0.5">{myListingsCount}</div>
           <div className="text-[11px] font-semibold text-muted-foreground">Items Listed</div>
         </div>
         <div className="text-center rounded-2xl bg-brand-sky py-3">
@@ -60,7 +66,7 @@ export function ProfilePage() {
             <Mail className="w-5 h-5 text-brand-blue" />
             <div className="flex-1">
               <p className="text-xs text-gray-500">Email</p>
-              <p className="text-sm">{currentUser.email}</p>
+              <p className="text-sm">{profile.email}</p>
             </div>
           </div>
 
@@ -68,9 +74,29 @@ export function ProfilePage() {
             <MapPin className="w-5 h-5 text-brand-blue" />
             <div className="flex-1">
               <p className="text-xs text-gray-500">University</p>
-              <p className="text-sm">{currentUser.university}</p>
+              <p className="text-sm">{profile.university}</p>
             </div>
           </div>
+
+          {profile.phone && (
+            <div className="flex items-center gap-3 p-3 bg-brand-sky rounded-2xl">
+              <Phone className="w-5 h-5 text-brand-blue" />
+              <div className="flex-1">
+                <p className="text-xs text-gray-500">Phone</p>
+                <p className="text-sm">{profile.phone}</p>
+              </div>
+            </div>
+          )}
+
+          {profile.campus && (
+            <div className="flex items-center gap-3 p-3 bg-brand-sky rounded-2xl">
+              <HomeIcon className="w-5 h-5 text-brand-blue" />
+              <div className="flex-1">
+                <p className="text-xs text-gray-500">Campus</p>
+                <p className="text-sm">{profile.campus}</p>
+              </div>
+            </div>
+          )}
 
           <div className="flex items-center gap-3 p-3 bg-brand-sky rounded-2xl">
             <Award className="w-5 h-5 text-brand-blue" />
@@ -107,11 +133,11 @@ export function ProfilePage() {
         {/* Settings */}
         <div className="space-y-2">
           <h2 className="text-sm text-gray-500">Settings</h2>
-          <Button variant="outline" className="w-full justify-start">
+          <Button variant="outline" className="w-full justify-start cursor-pointer" onClick={() => navigate("/home/my-listings")}>
             <Package className="w-5 h-5 mr-2" />
             My Listings
           </Button>
-          <Button variant="outline" className="w-full justify-start">
+          <Button variant="outline" className="w-full justify-start cursor-pointer" onClick={() => navigate("/home/edit-profile")}>
             Edit Profile
           </Button>
           <Button variant="outline" className="w-full justify-start">

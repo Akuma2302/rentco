@@ -9,6 +9,8 @@ import { AddItemPage } from "./pages/AddItemPage";
 import { MyRentalsPage } from "./pages/MyRentalsPage";
 import { MessagesPage } from "./pages/MessagesPage";
 import { ProfilePage } from "./pages/ProfilePage";
+import { MyListingsPage } from "./pages/MyListingsPage";
+import { EditProfilePage } from "./pages/EditProfilePage";
 import { PaymentPage } from "./pages/PaymentPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 
@@ -32,6 +34,8 @@ export const router = createBrowserRouter([
       { path: "my-rentals", element: <MyRentalsPage /> },
       { path: "messages", element: <MessagesPage /> },
       { path: "profile", element: <ProfilePage /> },
+      { path: "my-listings", element: <MyListingsPage /> },
+      { path: "edit-profile", element: <EditProfilePage /> },
       { path: "payment/:id", element: <PaymentPage /> },
       { path: "*", element: <NotFoundPage /> },
     ],

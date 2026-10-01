@@ -5,12 +5,50 @@ import { mockItems, categories } from "../data/mockData";
 import { ItemCard } from "../components/ItemCard";
 import { Logo } from "../components/Logo";
 import { CategoryTile, categoryIcons } from "../components/CategoryIcon";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../components/ui/dropdown-menu";
+
+const malaysianStates = [
+  "Johor",
+  "Kedah",
+  "Kelantan",
+  "Melaka",
+  "Negeri Sembilan",
+  "Pahang",
+  "Perak",
+  "Perlis",
+  "Pulau Pinang",
+  "Sabah",
+  "Sarawak",
+  "Selangor",
+  "Terengganu",
+];
+
+const federalTerritories = ["Kuala Lumpur", "Labuan", "Putrajaya"];
+
+const LOCATION_KEY = "rentco.location";
+
+function readSavedLocation() {
+  try {
+    return localStorage.getItem(LOCATION_KEY) ?? "Kuala Lumpur";
+  } catch {
+    return "Kuala Lumpur";
+  }
+}
 
 // The deck shows 7 categories plus a "More" tile in a 4x2 grid.
 const homeCategories = categories.filter((c) => c !== "All" && c !== "Other");
 
 export function HomePage() {
   const navigate = useNavigate();
+  const [location, setLocation] = useState(readSavedLocation);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [showFilters, setShowFilters] = useState(false);
@@ -35,11 +73,44 @@ export function HomePage() {
       {/* Top bar */}
       <div className="px-5 pt-7 flex items-center gap-2">
         <Logo size="sm" />
-        <button className="ml-2 flex items-center gap-1 text-[11px] font-semibold text-brand-navy/80 bg-brand-sky rounded-full px-2.5 py-1">
-          <MapPin className="w-3 h-3 text-brand-blue" />
-          Kuala Lumpur
-          <ChevronDown className="w-3 h-3" />
-        </button>
+        <DropdownMenu>
+          <DropdownMenuTrigger className="ml-2 flex items-center gap-1 text-[11px] font-semibold text-brand-navy/80 bg-brand-sky rounded-full px-2.5 py-1 outline-none cursor-pointer hover:bg-[#E0EAFF] data-[state=open]:bg-[#E0EAFF]">
+            <MapPin className="w-3 h-3 text-brand-blue" />
+            <span className="max-w-[96px] truncate">{location}</span>
+            <ChevronDown className="w-3 h-3" />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start" className="w-56 max-h-80 overflow-y-auto rounded-xl border-[#E3E9F5] shadow-[0_16px_40px_-12px_rgba(11,27,63,0.25)]">
+            <DropdownMenuRadioGroup
+              value={location}
+              onValueChange={(value) => {
+                setLocation(value);
+                try {
+                  localStorage.setItem(LOCATION_KEY, value);
+                } catch {
+                  // Storage unavailable; keep the choice for this session only.
+                }
+              }}
+            >
+              <DropdownMenuLabel className="text-[11px] uppercase tracking-wide text-muted-foreground">
+                States
+              </DropdownMenuLabel>
+              {malaysianStates.map((state) => (
+                <DropdownMenuRadioItem key={state} value={state} className="text-sm">
+                  {state}
+                </DropdownMenuRadioItem>
+              ))}
+              <DropdownMenuSeparator />
+              <DropdownMenuLabel className="text-[11px] uppercase tracking-wide text-muted-foreground">
+                Federal Territories
+              </DropdownMenuLabel>
+              {federalTerritories.map((territory) => (
+                <DropdownMenuRadioItem key={territory} value={territory} className="text-sm">
+                  {territory}
+                </DropdownMenuRadioItem>
+              ))}
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
         <div className="flex-1" />
         <button
           onClick={() => navigate("/home/messages")}

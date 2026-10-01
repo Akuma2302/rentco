@@ -50,7 +50,7 @@ export function ExplorePage() {
 
       {/* Category chips */}
       <div className="px-5 overflow-x-auto">
-        <div className="flex gap-2 pb-1">
+        <div className="flex gap-2 pb-3">
           {categories.map((cat) => {
             const Icon = categoryIcons[cat];
             const active = category === cat;
