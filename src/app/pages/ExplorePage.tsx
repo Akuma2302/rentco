@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Search } from "lucide-react";
-import { mockItems, categories } from "../data/mockData";
+import { categories } from "../data/mockData";
+import { getItems } from "../data/listings";
 import { ItemCard } from "../components/ItemCard";
 import { PageHeader } from "../components/PageHeader";
 import { categoryIcons } from "../components/CategoryIcon";
@@ -19,7 +20,7 @@ export function ExplorePage() {
   const [category, setCategory] = useState("All");
   const [sort, setSort] = useState<Sort>("recommended");
 
-  const results = mockItems
+  const results = getItems()
     .filter(
       (item) =>
         (category === "All" || item.category === category) &&

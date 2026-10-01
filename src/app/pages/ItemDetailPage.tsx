@@ -15,7 +15,8 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "../components/ui/button";
-import { mockItems, mockReviews } from "../data/mockData";
+import { mockReviews } from "../data/mockData";
+import { getItem } from "../data/listings";
 import { ReviewCard } from "../components/ReviewCard";
 import { mockTrustScores } from "../data/trustScore";
 import { TrustScoreCard } from "../components/TrustScoreCard";
@@ -28,7 +29,7 @@ export function ItemDetailPage() {
   const navigate = useNavigate();
   const [showAgreement, setShowAgreement] = useState(false);
   const [saved, setSaved] = useState(false);
-  const item = mockItems.find((i) => i.id === id);
+  const item = getItem(id);
   const itemReviews = mockReviews.filter((r) => r.itemId === id);
   const ownerTrust = item ? mockTrustScores[item.ownerId] : undefined;
 

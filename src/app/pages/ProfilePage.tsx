@@ -1,7 +1,8 @@
 import { Star, Mail, MapPin, Phone, Home as HomeIcon, Award, Package, LogOut, Trophy, Zap, BadgeCheck } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { useNavigate } from "react-router";
-import { currentUser, mockItems } from "../data/mockData";
+import { currentUser } from "../data/mockData";
+import { getItems } from "../data/listings";
 import { useProfile } from "../data/profile";
 import { mockTrustScores } from "../data/trustScore";
 import { TrustScoreCard } from "../components/TrustScoreCard";
@@ -10,7 +11,7 @@ export function ProfilePage() {
   const navigate = useNavigate();
   const { profile } = useProfile();
   const myTrust = mockTrustScores[currentUser.id];
-  const myListingsCount = mockItems.filter((item) => item.ownerId === currentUser.id).length;
+  const myListingsCount = getItems().filter((item) => item.ownerId === currentUser.id).length;
 
   return (
     <div className="flex flex-col h-full bg-white">

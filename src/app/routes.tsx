@@ -11,6 +11,7 @@ import { MessagesPage } from "./pages/MessagesPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { MyListingsPage } from "./pages/MyListingsPage";
 import { EditProfilePage } from "./pages/EditProfilePage";
+import { EditListingPage } from "./pages/EditListingPage";
 import { PaymentPage } from "./pages/PaymentPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 
@@ -36,6 +37,7 @@ export const router = createBrowserRouter([
       { path: "profile", element: <ProfilePage /> },
       { path: "my-listings", element: <MyListingsPage /> },
       { path: "edit-profile", element: <EditProfilePage /> },
+      { path: "edit-listing/:id", element: <EditListingPage /> },
       { path: "payment/:id", element: <PaymentPage /> },
       { path: "*", element: <NotFoundPage /> },
     ],

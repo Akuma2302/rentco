@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { Star, MapPin, Heart } from "lucide-react";
+import { Star, MapPin, Heart, Pencil } from "lucide-react";
 import type { Item } from "../data/mockData";
 import { mockTrustScores } from "../data/trustScore";
 import { TrustScoreBadge } from "./TrustScoreBadge";
 
 interface ItemCardProps {
   item: Item;
+  /** Shows an edit button instead of the save heart, for the owner's own listings. */
+  onEdit?: () => void;
 }
 
-export function ItemCard({ item }: ItemCardProps) {
+export function ItemCard({ item, onEdit }: ItemCardProps) {
   const navigate = useNavigate();
   const [saved, setSaved] = useState(false);
   const trustScore = mockTrustScores[item.ownerId];
@@ -25,18 +27,32 @@ export function ItemCard({ item }: ItemCardProps) {
           alt={item.title}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
         />
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            setSaved((s) => !s);
-          }}
-          aria-label={saved ? "Remove from saved" : "Save item"}
-          className="absolute top-2 right-2 w-8 h-8 rounded-full bg-white/95 flex items-center justify-center shadow-sm"
-        >
-          <Heart
-            className={`w-4 h-4 ${saved ? "fill-brand-blue text-brand-blue" : "text-brand-navy"}`}
-          />
-        </button>
+        {onEdit ? (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onEdit();
+            }}
+            aria-label={`Edit ${item.title}`}
+            className="absolute top-2 right-2 z-10 h-8 px-2.5 rounded-full bg-white/95 flex items-center gap-1 text-[11px] font-semibold text-brand-navy shadow-sm cursor-pointer hover:text-brand-blue"
+          >
+            <Pencil className="w-3.5 h-3.5" />
+            Edit
+          </button>
+        ) : (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setSaved((s) => !s);
+            }}
+            aria-label={saved ? "Remove from saved" : "Save item"}
+            className="absolute top-2 right-2 w-8 h-8 rounded-full bg-white/95 flex items-center justify-center shadow-sm"
+          >
+            <Heart
+              className={`w-4 h-4 ${saved ? "fill-brand-blue text-brand-blue" : "text-brand-navy"}`}
+            />
+          </button>
+        )}
         {trustScore && (
           <div className="absolute bottom-2 left-2">
             <TrustScoreBadge score={trustScore.total} size="sm" />

@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router";
 import { Plus, Package } from "lucide-react";
-import { mockItems, currentUser } from "../data/mockData";
+import { currentUser } from "../data/mockData";
+import { getItems } from "../data/listings";
 import { ItemCard } from "../components/ItemCard";
 import { PageHeader } from "../components/PageHeader";
 
 export function MyListingsPage() {
   const navigate = useNavigate();
-  const myListings = mockItems.filter((item) => item.ownerId === currentUser.id);
+  const myListings = getItems().filter((item) => item.ownerId === currentUser.id);
   const availableCount = myListings.filter((item) => item.availability).length;
 
   return (
@@ -49,7 +50,11 @@ export function MyListingsPage() {
         ) : (
           <div className="grid grid-cols-2 gap-x-3 gap-y-4">
             {myListings.map((item) => (
-              <ItemCard key={item.id} item={item} />
+              <ItemCard
+                key={item.id}
+                item={item}
+                onEdit={() => navigate(`/home/edit-listing/${item.id}`)}
+              />
             ))}
           </div>
         )}

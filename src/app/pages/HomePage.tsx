@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Search, SlidersHorizontal, Bell, MapPin, ChevronDown, MessageCircle } from "lucide-react";
-import { mockItems, categories } from "../data/mockData";
+import { categories } from "../data/mockData";
+import { getItems } from "../data/listings";
 import { ItemCard } from "../components/ItemCard";
 import { Logo } from "../components/Logo";
 import { CategoryTile, categoryIcons } from "../components/CategoryIcon";
@@ -54,7 +55,7 @@ export function HomePage() {
   const [showFilters, setShowFilters] = useState(false);
   const [availableOnly, setAvailableOnly] = useState(false);
 
-  const filteredItems = mockItems.filter((item) => {
+  const filteredItems = getItems().filter((item) => {
     const matchesSearch =
       item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.description.toLowerCase().includes(searchQuery.toLowerCase());

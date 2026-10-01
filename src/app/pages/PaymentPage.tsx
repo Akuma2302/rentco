@@ -4,14 +4,14 @@ import { Calendar, CreditCard, Smartphone, QrCode, CheckCircle } from "lucide-re
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
-import { mockItems } from "../data/mockData";
+import { getItem } from "../data/listings";
 import { toast } from "sonner";
 import { PageHeader } from "../components/PageHeader";
 
 export function PaymentPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const item = mockItems.find((i) => i.id === id);
+  const item = getItem(id);
   const [paymentMethod, setPaymentMethod] = useState<string | null>(null);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
