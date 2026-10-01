@@ -1,4 +1,4 @@
-import { Star, Mail, MapPin, Award, Package, LogOut } from "lucide-react";
+import { Star, Mail, MapPin, Award, Package, LogOut, Trophy, Zap, BadgeCheck } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { currentUser } from "../data/mockData";
 import { mockTrustScores } from "../data/trustScore";
@@ -86,19 +86,19 @@ export function ProfilePage() {
           <h2 className="text-sm text-gray-500">Achievements</h2>
           <div className="grid grid-cols-2 gap-3">
             <div className="p-3 bg-brand-sky rounded-2xl text-center">
-              <div className="text-2xl mb-1">🏆</div>
+              <Trophy className="w-6 h-6 mx-auto mb-1 text-brand-blue" strokeWidth={2} />
               <p className="text-xs">Trusted Lender</p>
             </div>
             <div className="p-3 bg-brand-sky rounded-2xl text-center">
-              <div className="text-2xl mb-1">⭐</div>
+              <Star className="w-6 h-6 mx-auto mb-1 text-brand-blue" strokeWidth={2} />
               <p className="text-xs">5-Star Rating</p>
             </div>
             <div className="p-3 bg-brand-sky rounded-2xl text-center">
-              <div className="text-2xl mb-1">📦</div>
+              <Zap className="w-6 h-6 mx-auto mb-1 text-brand-blue" strokeWidth={2} />
               <p className="text-xs">Quick Responder</p>
             </div>
             <div className="p-3 bg-brand-sky rounded-2xl text-center">
-              <div className="text-2xl mb-1">🎯</div>
+              <BadgeCheck className="w-6 h-6 mx-auto mb-1 text-brand-blue" strokeWidth={2} />
               <p className="text-xs">Verified Student</p>
             </div>
           </div>

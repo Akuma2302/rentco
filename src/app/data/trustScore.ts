@@ -4,7 +4,6 @@ export interface TrustFactor {
   earned: number;
   max: number;
   description: string;
-  icon: string;
 }
 
 export interface TrustScoreData {
@@ -100,7 +99,6 @@ function buildFactors(data: {
       earned: rentalEarned,
       max: 30,
       description: `${data.completedRentals} successful rentals`,
-      icon: "📦",
     },
     {
       key: "returns",
@@ -108,7 +106,6 @@ function buildFactors(data: {
       earned: returnEarned,
       max: 20,
       description: `${data.returnRate}% return rate`,
-      icon: "↩️",
     },
     {
       key: "rating",
@@ -116,7 +113,6 @@ function buildFactors(data: {
       earned: ratingEarned,
       max: 20,
       description: `${data.averageRating.toFixed(1)} average rating`,
-      icon: "⭐",
     },
     {
       key: "cancellations",
@@ -124,7 +120,6 @@ function buildFactors(data: {
       earned: cancelEarned,
       max: 10,
       description: `${data.cancellationRate}% cancellation rate`,
-      icon: "❌",
     },
     {
       key: "verification",
@@ -132,7 +127,6 @@ function buildFactors(data: {
       earned: verifyEarned,
       max: 10,
       description: data.isVerified ? "Email & student ID verified" : "Not yet verified",
-      icon: "✅",
     },
     {
       key: "disputes",
@@ -140,7 +134,6 @@ function buildFactors(data: {
       earned: disputeEarned,
       max: 5,
       description: data.hasDisputes ? "Has prior disputes" : "No dispute history",
-      icon: "⚖️",
     },
     {
       key: "activity",
@@ -148,7 +141,6 @@ function buildFactors(data: {
       earned: activityEarned,
       max: 5,
       description: `Member since ${new Date(data.memberSince).toLocaleDateString("en-MY", { month: "short", year: "numeric" })}`,
-      icon: "📅",
     },
   ];
 }

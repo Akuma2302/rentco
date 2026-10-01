@@ -93,7 +93,6 @@ export function TrustScoreCard({ data, ownerName, compact = false }: TrustScoreC
                 <div key={factor.key}>
                   <div className="flex items-center justify-between mb-1">
                     <div className="flex items-center gap-1.5">
-                      <span className="text-sm leading-none">{factor.icon}</span>
                       <span className="text-xs text-gray-700">{factor.label}</span>
                     </div>
                     <div className="flex items-center gap-1">
